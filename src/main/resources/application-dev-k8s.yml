@@ -1,0 +1,8 @@
+spring: 
+  config:
+    activate:
+      on-profile: dev-k8s # 환경이름설정
+
+#HDS openfeign api call base address
+openfeign:
+  api_call_base_url: http://api-server:8080  # deployment.yml : Service : api-server

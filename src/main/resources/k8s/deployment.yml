@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: api-client
+  labels:
+    name: api-client
+spec:
+  ports:
+    - nodePort: 30165 
+      port: 8080      
+      targetPort: 8080  
+      protocol: TCP
+  selector:           
+    app: api-client
+  type: NodePort       
+
+---
+apiVersion: apps/v1 
+kind: Deployment    
+metadata:              
+  name: api-client
+spec:                
+  selector:         
+    matchLabels:
+      app: api-client
+  replicas: 1        
+  template:
+    metadata:
+      labels:        
+        app: api-client
+    spec:
+      containers:
+        - name: api-client
+          image: hdeok/api-client:1.1
+          ports:
+            - containerPort: 8080                

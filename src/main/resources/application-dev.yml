@@ -1,0 +1,12 @@
+server:
+ port: 8082
+
+spring: 
+  config:
+    activate:
+      on-profile: dev # 환경이름설정
+
+
+#HDS openfeign api call base address
+openfeign:
+  api_call_base_url: http://172.17.120.48:30164  # minikube ip : nodeport
