@@ -1,5 +1,8 @@
-FROM eclipse-temurin:17
+FROM maven as build
+COPY pom.xml .
+COPY src src
+RUN mvn package -Dmaven.test.skip=true
 
-WORKDIR /app
-COPY target/boot-example-1.0.0.jar /app/app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+FROM eclipse-temurin:17
+COPY --from=build /target/*.jar app.jar
+CMD ["java", "-jar", "app.jar"]
